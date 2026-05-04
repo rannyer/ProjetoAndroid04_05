@@ -11,37 +11,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.projetoandroid04_05.core.di.AppContainer
+import com.example.projetoandroid04_05.navigation.AppNavigation
 import com.example.projetoandroid04_05.ui.theme.ProjetoAndroid04_05Theme
 
 class MainActivity : ComponentActivity() {
+    private lateinit var appContainer: AppContainer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        appContainer = AppContainer(applicationContext)
+
         setContent {
-            ProjetoAndroid04_05Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            AppNavigation(appContainer = appContainer)
+
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ProjetoAndroid04_05Theme {
-        Greeting("Android")
     }
 }

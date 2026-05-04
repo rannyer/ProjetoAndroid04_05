@@ -1,4 +1,4 @@
 package com.example.projetoandroid04_05.feature.home
 
-class HomeScreen {
+class HomeScreen(onOpenProfile: () -> Unit) {
 }
