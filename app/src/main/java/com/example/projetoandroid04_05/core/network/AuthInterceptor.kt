@@ -1,5 +1,6 @@
 package com.example.projetoandroid04_05.core.network
 
+import android.util.Log
 import com.example.projetoandroid04_05.core.session.TokenManager
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.fold
@@ -14,6 +15,7 @@ class AuthInterceptor(
         val token = runBlocking {
             tokenManager.token.first()
         }
+        Log.e("INTERCEPTOR_VM", token.toString())
 
         val request = if(!token.isNullOrBlank()) {
             chain.request()
@@ -23,6 +25,8 @@ class AuthInterceptor(
         }else{
             chain.request()
         }
+        Log.e("INTERCEPTOR_VM_CHAIN", "Headers ${request.headers}")
+
 
         return chain.proceed(request)
 
